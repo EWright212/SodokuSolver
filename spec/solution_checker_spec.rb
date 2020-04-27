@@ -22,6 +22,14 @@ describe 'final answer checked if correct' do
       puzzle = Puzzle.new
       expect(puzzle.verify_solution(123416789123456789123456789123456789123456789123456789123456789123456789123456789)).to eq false
     end
+    it 'checks row 2 includes unique values true' do
+      puzzle = Puzzle.new
+      expect(puzzle.verify_solution(123456789123456789123456789123456789123456789123456789123456789123456789123456789)).to eq true
+    end
+    it 'checks row 2 includes unique values false' do
+      puzzle = Puzzle.new
+      expect(puzzle.verify_solution(123456789113456789123456789123456789123456789123456789123456789123456789123456789)).to eq false
+    end
   end
 end
 

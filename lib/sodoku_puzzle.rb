@@ -29,7 +29,12 @@ class Puzzle
   def row_checker(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     first_row = puzzle_array[0...9]
-    first_row.size == first_row.uniq.size ? true : false
+    second_row = puzzle_array[9...18]
+    if first_row.size == first_row.uniq.size && second_row.size == second_row.uniq.size
+      true
+    else
+      false
+    end
   end
 # not_unique.size == not_unique.uniq.size
 end
