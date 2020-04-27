@@ -15,7 +15,6 @@ class Puzzle
         formatted_puzzle << "  "
       end
     end
-
   formatted_puzzle
   end
 
