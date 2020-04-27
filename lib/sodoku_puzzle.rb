@@ -6,10 +6,13 @@ class Puzzle
 
     puzzle_array = puzzle_int.to_s.split(//)
     first_three = ""
-    for i in 0..1
-      first_three << puzzle_array[i] + "  "
+    for i in 1..3
+      if i % 3 == 0
+        first_three << puzzle_array[i-1] + " "
+      else
+        first_three << puzzle_array[i-1] + "  "
+      end
     end
-    first_three << puzzle_array[2] + " "
 
 "
 #{first_three}| #{puzzle_array[3]}  5  6 | 7  8  9
