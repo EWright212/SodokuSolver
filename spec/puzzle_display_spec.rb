@@ -49,6 +49,22 @@ describe 'shows formatted puzzle' do
 1  2  3 | 4  5  6 | 7  8  9
 ")
   end
+  it 'shows formatted complete puzzle v4' do
+    puzzle = Puzzle.new
+    expect(puzzle.formatted_display(111156789123456789123456789123456789123456789123456789123456789123456789123456789)).to eq("
+1  1  1 | 1  5  6 | 7  8  9
+1  2  3 | 4  5  6 | 7  8  9
+1  2  3 | 4  5  6 | 7  8  9
+--------------------------
+1  2  3 | 4  5  6 | 7  8  9
+1  2  3 | 4  5  6 | 7  8  9
+1  2  3 | 4  5  6 | 7  8  9
+--------------------------
+1  2  3 | 4  5  6 | 7  8  9
+1  2  3 | 4  5  6 | 7  8  9
+1  2  3 | 4  5  6 | 7  8  9
+")
+  end
 #   it 'shows formatted complete puzzle vFILL IN' do
 #     puzzle = Puzzle.new
 #     expect(puzzle.formatted_display(123456781123456781123456781123456781123456781123456781123456781123456781123456781)).to eq("
