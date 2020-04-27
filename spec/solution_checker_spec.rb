@@ -1,4 +1,4 @@
-require 'SodokuPuzzle'
+require 'sodoku_puzzle'
 
 describe 'final answer checked if correct' do
   it 'confirms correct solution' do
