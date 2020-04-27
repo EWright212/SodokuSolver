@@ -32,8 +32,3 @@ describe 'final answer checked if correct' do
     end
   end
 end
-
-# TODO
-# Throws error if too few numbers
-# Throws error if too many numbers
-# Throws incomplete error if any zeros

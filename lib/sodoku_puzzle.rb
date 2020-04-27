@@ -36,5 +36,5 @@ class Puzzle
       false
     end
   end
-# not_unique.size == not_unique.uniq.size
+
 end
