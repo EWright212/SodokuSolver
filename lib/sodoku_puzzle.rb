@@ -1,9 +1,6 @@
 class Puzzle
 
   def formatted_display(puzzle_int)
-    output = "/n"
-    row = 1
-
     puzzle_array = puzzle_int.to_s.split(//)
     formatted_puzzle = "\n"
     for i in 1..81
