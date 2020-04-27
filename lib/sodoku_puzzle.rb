@@ -5,22 +5,21 @@ class Puzzle
     row = 1
 
     puzzle_array = puzzle_int.to_s.split(//)
-    single_row = ""
+    formatted_puzzle = "\n"
     for i in 1..81
-      single_row << puzzle_array[i-1]
+      formatted_puzzle << puzzle_array[i-1]
       if i == 27 || i == 54
-        single_row << "\n--------------------------\n"
+        formatted_puzzle << "\n--------------------------\n"
       elsif i % 9 == 0
-        single_row << "\n"
+        formatted_puzzle << "\n"
       elsif i % 3 == 0
-        single_row << " | "
+        formatted_puzzle << " | "
       else
-        single_row << "  "
+        formatted_puzzle << "  "
       end
     end
 
-"
-#{single_row}"
+  formatted_puzzle
   end
 
   def verify_solution(solved_puzzle)
