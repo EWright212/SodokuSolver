@@ -6,9 +6,11 @@ class Puzzle
 
     puzzle_array = puzzle_int.to_s.split(//)
     single_row = ""
-    for i in 1..9
+    for i in 1..81
       single_row << puzzle_array[i-1]
-      if i == 9
+      if i == 27 || i == 54
+        single_row << "\n--------------------------\n"
+      elsif i % 9 == 0
         single_row << "\n"
       elsif i % 3 == 0
         single_row << " | "
@@ -18,17 +20,7 @@ class Puzzle
     end
 
 "
-#{single_row}1  2  3 | 4  5  6 | 7  8  9
-1  2  3 | 4  5  6 | 7  8  9
---------------------------
-1  2  3 | 4  5  6 | 7  8  9
-1  2  3 | 4  5  6 | 7  8  9
-1  2  3 | 4  5  6 | 7  8  9
---------------------------
-1  2  3 | 4  5  6 | 7  8  9
-1  2  3 | 4  5  6 | 7  8  9
-1  2  3 | 4  5  6 | 7  8  9
-"
+#{single_row}"
   end
 
   def verify_solution(solved_puzzle)
