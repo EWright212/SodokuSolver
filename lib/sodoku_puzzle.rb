@@ -5,19 +5,20 @@ class Puzzle
     row = 1
 
     puzzle_array = puzzle_int.to_s.split(//)
-    first_three = ""
-    for i in 1..4
-      first_three << puzzle_array[i-1]
-      if i % 3 == 0
-        first_three << " | "
+    single_row = ""
+    for i in 1..9
+      single_row << puzzle_array[i-1]
+      if i == 9
+        single_row << "\n"
+      elsif i % 3 == 0
+        single_row << " | "
       else
-        first_three << "  "
+        single_row << "  "
       end
     end
 
 "
-#{first_three}5  6 | 7  8  9
-1  2  3 | 4  5  6 | 7  8  9
+#{single_row}1  2  3 | 4  5  6 | 7  8  9
 1  2  3 | 4  5  6 | 7  8  9
 --------------------------
 1  2  3 | 4  5  6 | 7  8  9
