@@ -7,10 +7,11 @@ class Puzzle
     puzzle_array = puzzle_int.to_s.split(//)
     first_three = ""
     for i in 1..3
+      first_three << puzzle_array[i-1]
       if i % 3 == 0
-        first_three << puzzle_array[i-1] + " "
+        first_three << " "
       else
-        first_three << puzzle_array[i-1] + "  "
+        first_three << "  "
       end
     end
 
