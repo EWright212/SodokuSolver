@@ -1,5 +1,10 @@
 class Puzzle
 
+  def intialize
+    @square_width = 3
+    @row_width = 9
+  end
+
   def check_solution_length(puzzle_int)
     puzzle_int.to_s.length == 81 ? true : false
   end
@@ -62,9 +67,6 @@ class Puzzle
 
   def square_checker(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    pretty_display = formatted_display(filled_in_puzzle)
-    print pretty_display
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     current_square = []
     # Squares are grouped in threes depending on which row they're in
     for i in (0...9)
@@ -100,9 +102,8 @@ class Puzzle
           current_square << puzzle_array[j + (3 * (i-6))]
         end
       end
-      p current_square
       current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
-      # break if solution_okay == false
+      break if solution_okay == false
       current_square = []
     end
     solution_okay
@@ -117,6 +118,7 @@ class Puzzle
     # TESTING var only
     all_squares = []
     # Squares are grouped in threes depending on which row they're in
+    p @row_width
     for i in (0...9)
       square_group = i / 3
       for k in (square_group * 3...square_group * 3 + 3)
