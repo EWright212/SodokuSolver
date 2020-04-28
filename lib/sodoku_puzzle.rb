@@ -45,6 +45,7 @@ class Puzzle
       end
       current_column.size == current_column.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
+      
       current_column = []
     end
     solution_okay
@@ -61,10 +62,11 @@ class Puzzle
         current_square << puzzle_array[j + (3 * i)]
       end
       for j in (18...21)
-        current_square << puzzle_array[j+ (3 * i)]
+        current_square << puzzle_array[j + (3 * i)]
       end
       current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
+      
       current_square = []
     end
     solution_okay
