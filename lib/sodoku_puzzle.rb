@@ -37,16 +37,14 @@ class Puzzle
   end
 
   def column_checker(filled_in_puzzle)
-    p formatted_display(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     current_column = []
     for i in (0...9)
       for j in (0...9)
         current_column << puzzle_array[(j * 9) + i]
       end
-      p "row count is #{i}"
-      p current_column
       current_column.size == current_column.uniq.size ? solution_okay = true : solution_okay = false
+      break if solution_okay == false
       current_column = []
     end
     solution_okay
