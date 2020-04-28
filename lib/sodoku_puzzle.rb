@@ -53,16 +53,22 @@ class Puzzle
   def square_checker(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     current_square = []
-    for i in (0...3)
-      current_square << puzzle_array[i]
+    for i in (0...9)
+      for j in (0...3)
+        current_square << puzzle_array[j + (3 * i)]
+      end
+      for j in (9...12)
+        current_square << puzzle_array[j + (3 * i)]
+      end
+      for j in (18...21)
+        current_square << puzzle_array[j+ (3 * i)]
+      end
+      p current_square
+      current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
+      break if solution_okay == false
+      current_square = []
     end
-    for i in (9...12)
-      current_square << puzzle_array[i]
-    end
-    for i in (18...21)
-      current_square << puzzle_array[i]
-    end
-    current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
+    solution_okay
   end
 
 end
