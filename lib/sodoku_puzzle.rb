@@ -118,27 +118,10 @@ class Puzzle
     all_squares = []
     # Squares are grouped in threes depending on which row they're in
     for i in (0...9)
-      if i < 3
-        square_group = 0
-        for k in (0...3)
-          for j in ((square_group + 1) * 9 * k ...(square_group + 1) * 9 * k + 3)
-            current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-          end
-        end
-      elsif i < 6
-        square_group = 1
-        for k in (3...6)
-          for j in ((square_group) * 9 * k ...(square_group) * 9 * k + 3)
-            current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-          end
-        end
-      else
-        square_group = 2
-        # for j in (54...57)
-        for k in (6...9)
-          for j in ((square_group - 1) * 9 * k ...(square_group - 1) * 9 * k + 3)
-            current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-          end
+      square_group = i / 3
+      for k in (square_group * 3...square_group * 3 + 3)
+        for j in (9 * k ... 9 * k + 3)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
         end
       end
       p current_square
