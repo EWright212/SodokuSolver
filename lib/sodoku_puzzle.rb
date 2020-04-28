@@ -27,15 +27,18 @@ class Puzzle
   end
 
   def row_checker(filled_in_puzzle)
+    solution_okay = true
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    first_row = puzzle_array[0...9]
-    second_row = puzzle_array[9...18]
-    third_row = puzzle_array[18...27]
-    if first_row.size == first_row.uniq.size && second_row.size == second_row.uniq.size && third_row.size == third_row.uniq.size
-      true
-    else
-      false
+    for i in (0...9)
+      current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
+      if current_row.size == current_row.uniq.size
+        solution_okay = true
+      else
+        solution_okay = false
+      end
+      break if solution_okay == false
     end
+    solution_okay
   end
 
 end
