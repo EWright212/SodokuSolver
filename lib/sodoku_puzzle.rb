@@ -52,7 +52,17 @@ class Puzzle
 
   def square_checker(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    true
+    current_square = []
+    for i in (0...3)
+      current_square << puzzle_array[i]
+    end
+    for i in (9...12)
+      current_square << puzzle_array[i]
+    end
+    for i in (18...21)
+      current_square << puzzle_array[i]
+    end
+    current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
   end
 
 end
