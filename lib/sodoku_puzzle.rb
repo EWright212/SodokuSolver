@@ -65,9 +65,6 @@ class Puzzle
   end
 
   def square_checker(filled_in_puzzle)
-    p check_solution_length(filled_in_puzzle)
-    abcd = formatted_display(filled_in_puzzle)
-    print abcd
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     current_square = []
     for i in (0...9)
