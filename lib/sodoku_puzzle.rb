@@ -50,4 +50,9 @@ class Puzzle
     solution_okay
   end
 
+  def square_checker(filled_in_puzzle)
+    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
+    true
+  end
+
 end
