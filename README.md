@@ -2,10 +2,9 @@
 Current status:
  - can take input for puzzle
  - can diplay puzzle in manner readable by humans
- - Can check first two rows have unique values
+ - Can check first all rows have unique values
 
 TODO - code
-- continue with row checker
 - column checker
 - square checker
 - solving section

@@ -36,4 +36,14 @@ class Puzzle
     solution_okay
   end
 
+  def column_checker(filled_in_puzzle)
+    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
+    current_column = []
+    for i in (0...9)
+      current_column << puzzle_array[i * 9]
+      current_column.size == current_column.uniq.size ? solution_okay = true : solution_okay = false
+    end
+    solution_okay
+  end
+
 end
