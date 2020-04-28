@@ -2,14 +2,16 @@
 Current status:
  - can take input for puzzle
  - can diplay puzzle in manner readable by humans
- - Can check first all rows have unique values
+ - Can check all rows have unique values
+ - can check all columns have unique values
+ - Can check all squares have unique values
 
 TODO - code
-- column checker
-- square checker
 - solving section
+- Show where errors coming from
 
 TODO - refactor
+- square method huge, needs urgent work
 - formatt number displayer and split into different methods
 - split into classes - display, checking, solving
   

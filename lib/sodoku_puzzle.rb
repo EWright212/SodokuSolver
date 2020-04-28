@@ -32,10 +32,6 @@ class Puzzle
     column = column_checker(filled_in_puzzle)
     square = square_checker(filled_in_puzzle)
     abcd = formatted_display(filled_in_puzzle)
-    # print abcd
-    # p row
-    # p square
-    # p column
     row == column && row == square && row == true ? true : false
   end
 
