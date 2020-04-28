@@ -63,7 +63,6 @@ class Puzzle
       for j in (18...21)
         current_square << puzzle_array[j+ (3 * i)]
       end
-      p current_square
       current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
       current_square = []

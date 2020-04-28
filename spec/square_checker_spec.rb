@@ -13,5 +13,4 @@ describe 'square checker' do
     puzzle = Puzzle.new
     expect(puzzle.square_checker(123193123456456456789789789111111222222333333444444555555666666)).to eq false
   end
-
 end
