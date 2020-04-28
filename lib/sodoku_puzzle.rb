@@ -27,7 +27,6 @@ class Puzzle
   end
 
   def row_checker(filled_in_puzzle)
-    solution_okay = true
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     for i in (0...9)
       current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
