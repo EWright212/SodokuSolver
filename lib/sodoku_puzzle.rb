@@ -132,24 +132,13 @@ class Puzzle
             current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
           end
         end
-        # for j in (36...39)
-        # for j in ((square_group) * 9 * 4 ...(square_group) * 9 * 4 + 3)
-        #   current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-        # end
-        # # for j in (45...48)
-        # for j in ((square_group) * 9 * 5 ...(square_group) * 9 * 5 + 3)
-        #   current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-        # end
       else
         square_group = 2
-        for j in (54...57)
-          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-        end
-        for j in (63...66)
-          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
-        end
-        for j in (72...75)
-          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        # for j in (54...57)
+        for k in (6...9)
+          for j in ((square_group - 1) * 9 * k ...(square_group - 1) * 9 * k + 3)
+            current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+          end
         end
       end
       p current_square
