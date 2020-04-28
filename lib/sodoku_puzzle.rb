@@ -1,7 +1,7 @@
 class Puzzle
 
   def check_solution_length(puzzle_int)
-    puzzle_int.to_s.length
+    puzzle_int.to_s.length == 81 ? true : false
   end
 
   def puzzle_int_to_array(puzzle_int)
