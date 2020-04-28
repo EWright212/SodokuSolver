@@ -32,10 +32,10 @@ class Puzzle
     column = column_checker(filled_in_puzzle)
     square = square_checker(filled_in_puzzle)
     abcd = formatted_display(filled_in_puzzle)
-    print abcd
-    p row
-    p square
-    p column
+    # print abcd
+    # p row
+    # p square
+    # p column
     row == column && row == square && row == true ? true : false
   end
 
@@ -102,10 +102,8 @@ class Puzzle
           current_square << puzzle_array[j + (3 * (i-6))]
         end
       end
-      p current_square
       current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
-      
       current_square = []
     end
     solution_okay
