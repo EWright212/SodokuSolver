@@ -108,4 +108,53 @@ class Puzzle
     solution_okay
   end
 
+  def square_checker_refactor(filled_in_puzzle)
+    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
+    pretty_display = formatted_display(filled_in_puzzle)
+    print pretty_display
+    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
+    current_square = []
+    # TESTING var only
+    all_squares = []
+    # Squares are grouped in threes depending on which row they're in
+    for i in (0...9)
+      if i < 3
+        square_group = 0
+        for k in (0...3)
+          for j in ((square_group + 1) * 9 * k ...(square_group + 1) * 9 * k + 3)
+            current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+          end
+        end
+      elsif i < 6
+        square_group = 1
+        for j in (27...30)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        end
+        for j in (36...39)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        end
+        for j in (45...48)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        end
+      else
+        square_group = 2
+        for j in (54...57)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        end
+        for j in (63...66)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        end
+        for j in (72...75)
+          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+        end
+      end
+      p current_square
+      current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
+      # break if solution_okay == false
+      all_squares << current_square
+      current_square = []
+    end
+    all_squares
+  end
+
 end
