@@ -30,7 +30,8 @@ class Puzzle
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     first_row = puzzle_array[0...9]
     second_row = puzzle_array[9...18]
-    if first_row.size == first_row.uniq.size && second_row.size == second_row.uniq.size
+    third_row = puzzle_array[18...27]
+    if first_row.size == first_row.uniq.size && second_row.size == second_row.uniq.size && third_row.size == third_row.uniq.size
       true
     else
       false
