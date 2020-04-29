@@ -28,7 +28,8 @@ class Puzzle
   end
 
   def current_row_digit_solver(digit, current_row)
-    9
+    sodoku_options = (1..9).to_a
+    digit = sodoku_options - current_row
   end
 
   def puzzle_to_array_of_strings(puzzle)
