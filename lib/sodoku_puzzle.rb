@@ -17,8 +17,24 @@ class Puzzle
     solved_puzzle.join.to_i
   end
 
+  def column_solver(incomplete_puzzle)
+    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
+    solved_puzzle = []
+    current_column = []
+    for i in (0...9)
+      for j in (0...9)
+        current_column << puzzle_array[(j * 9) + i]
+      end
+      # simply shoving columns on won't work, will need to transpose
+      solved_puzzle << current_row_solver(current_column)
+      current_column = []
+    end
+    solved_puzzle.transpose.join.to_i
+  end
+
   private
 
+  # RENAME THESE TWO AS WORK FOR OTHER SECTIONS
   def current_row_solver(current_row)
     current_row.map do |digit|
       digit == 0 ? digit = current_row_digit_solver(digit, current_row) : digit
@@ -27,6 +43,7 @@ class Puzzle
 
   def current_row_digit_solver(digit, current_row)
     digit = SODOKU_DIGIT_OPTIONS - current_row
+    digit[0]
   end
 
   def puzzle_to_array_of_strings(puzzle)
