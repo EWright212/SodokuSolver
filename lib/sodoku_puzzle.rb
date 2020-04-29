@@ -6,25 +6,30 @@ class Puzzle
 
   def row_solver(incomplete_puzzle)
     puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
-    solved_puzzle = puzzle_array.map do |digit|
+    solved_puzzle = []
+    for i in (0...9)
+      current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
+      solved_puzzle << current_row_solver(current_row)
+      current_row = []
+    end
+    solved_puzzle.join.to_i
+  end
+
+  # def loop_over_all_rows
+  #   
+  # end
+
+  private
+
+  def current_row_solver(current_row)
+    current_row.map do |digit|
       if digit == 0
         digit = 9
       else
         digit
       end
     end
-    solved_puzzle.join.to_i
   end
-
-  # def get_current_row
-  #   for i in (0...9)
-  #     current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
-  #     current_row.size == current_row.uniq.size ? solution_okay = true : solution_okay = false
-  #     break if solution_okay == false
-  #   end
-  # end
-
-  private
 
   def puzzle_to_array_of_strings(puzzle)
     puzzle_string_array = puzzle.to_s.split(//)
