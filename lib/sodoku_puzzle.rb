@@ -65,45 +65,11 @@ class Puzzle
   end
 
   def square_checker(filled_in_puzzle)
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    current_square = []
-    # Squares are grouped in threes depending on which row they're in
-    for i in (0...9)
-      if i < 3
-        square_group = 0
-        for j in (0...3)
-          current_square << puzzle_array[j + (3 * i)]
-        end
-        for j in (9...12)
-          current_square << puzzle_array[j + (3 * i)]
-        end
-        for j in (18...21)
-          current_square << puzzle_array[j + (3 * i)]
-        end
-      elsif i < 6
-        for j in (27...30)
-          current_square << puzzle_array[j + (3 * (i-3))]
-        end
-        for j in (36...39)
-          current_square << puzzle_array[j + (3 * (i-3))]
-        end
-        for j in (45...48)
-          current_square << puzzle_array[j + (3 * (i-3))]
-        end
-      else
-        for j in (54...57)
-          current_square << puzzle_array[j + (3 * (i-6))]
-        end
-        for j in (63...66)
-          current_square << puzzle_array[j + (3 * (i-6))]
-        end
-        for j in (72...75)
-          current_square << puzzle_array[j + (3 * (i-6))]
-        end
-      end
+    all_squares = square_array_sorter(filled_in_puzzle)
+    solution_okay = nil
+    all_squares.each do |current_square|
       current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
-      current_square = []
     end
     solution_okay
   end
