@@ -6,8 +6,7 @@ class Puzzle
 
   def row_solver(incomplete_puzzle)
     puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
-    puzzle_in_progress = puzzle_array.map { |digit| digit = digit.to_i }
-    solved_puzzle = puzzle_in_progress.map do |digit|
+    solved_puzzle = puzzle_array.map do |digit|
       if digit == 0
         digit = 9
       else
@@ -28,7 +27,8 @@ class Puzzle
   private
 
   def puzzle_to_array_of_strings(puzzle)
-    puzzle.to_s.split(//)
+    puzzle_string_array = puzzle.to_s.split(//)
+    puzzle_int_array = puzzle_string_array.map { |digit| digit = digit.to_i }
   end
 
 end
