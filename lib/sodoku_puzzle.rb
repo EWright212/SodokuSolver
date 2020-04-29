@@ -23,12 +23,12 @@ class Puzzle
 
   def current_row_solver(current_row)
     current_row.map do |digit|
-      if digit == 0
-        digit = 9
-      else
-        digit
-      end
+      digit == 0 ? digit = current_row_digit_solver(digit, current_row) : digit
     end
+  end
+
+  def current_row_digit_solver(digit, current_row)
+    9
   end
 
   def puzzle_to_array_of_strings(puzzle)
