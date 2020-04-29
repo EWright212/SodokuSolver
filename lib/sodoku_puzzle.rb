@@ -1,9 +1,7 @@
 class Puzzle
-
-  def intialize
-    @square_width = 3
-    @row_width = 9
-  end
+  
+  SQUARE_WIDTH = 3
+  ROW_WIDTH = 9
 
   def check_solution_length(puzzle_int)
     puzzle_int.to_s.length == 81 ? true : false
@@ -109,7 +107,7 @@ class Puzzle
     solution_okay
   end
 
-  def square_checker_refactor(filled_in_puzzle)
+  def square_array_sorter(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     pretty_display = formatted_display(filled_in_puzzle)
     print pretty_display
@@ -118,12 +116,11 @@ class Puzzle
     # TESTING var only
     all_squares = []
     # Squares are grouped in threes depending on which row they're in
-    p @row_width
-    for i in (0...9)
-      square_group = i / 3
-      for k in (square_group * 3...square_group * 3 + 3)
-        for j in (9 * k ... 9 * k + 3)
-          current_square << puzzle_array[j + (3 * (i - ( 3 * square_group)))]
+    for i in (0...ROW_WIDTH)
+      square_group = i / SQUARE_WIDTH
+      for k in (square_group * SQUARE_WIDTH...square_group * SQUARE_WIDTH + SQUARE_WIDTH)
+        for j in (ROW_WIDTH * k ... ROW_WIDTH * k + SQUARE_WIDTH)
+          current_square << puzzle_array[j + (SQUARE_WIDTH * (i - ( SQUARE_WIDTH * square_group)))]
         end
       end
       p current_square
