@@ -11,9 +11,7 @@ TODO - code
 - Show where errors coming from
 
 TODO - refactor
-- square method huge, needs urgent work
-- formatt number displayer and split into different methods
-- split into classes - display, checking, solving
+- current checker methods hard to read and understand
   
 TODO - edge cases
 - Throws error if too few numbers

@@ -1,4 +1,4 @@
-require 'sodoku_puzzle'
+require 'sodoku_solution_checker'
 
 describe 'row checker' do
   it 'checks all rows true' do
