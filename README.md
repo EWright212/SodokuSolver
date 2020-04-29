@@ -5,10 +5,14 @@ Current status:
  - Can check all rows have unique values
  - can check all columns have unique values
  - Can check all squares have unique values
+ - Can solve if one number missing in any row/column
 
 TODO - code
-- solving section
-- Show where errors coming from
+- solving squares
+- bring solving section together
+- work on sections to find out where the only possible location for a number is e.g. only place a 2 can go in row 1
+- mark each square with possible options - if one has only one option reupdate. Lot of while loops?
+- Show where errors in sodoku (human) solution coming from
 
 TODO - refactor
 - current checker methods hard to read and understand
