@@ -11,7 +11,7 @@ class Puzzle
     solved_puzzle = []
     for i in (0...9)
       current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
-      solved_puzzle << current_row_solver(current_row)
+      solved_puzzle << current_section_solver(current_row)
       current_row = []
     end
     solved_puzzle.join.to_i
@@ -25,8 +25,7 @@ class Puzzle
       for j in (0...9)
         current_column << puzzle_array[(j * 9) + i]
       end
-      # simply shoving columns on won't work, will need to transpose
-      solved_puzzle << current_row_solver(current_column)
+      solved_puzzle << current_section_solver(current_column)
       current_column = []
     end
     solved_puzzle.transpose.join.to_i
@@ -35,14 +34,14 @@ class Puzzle
   private
 
   # RENAME THESE TWO AS WORK FOR OTHER SECTIONS
-  def current_row_solver(current_row)
-    current_row.map do |digit|
-      digit == 0 ? digit = current_row_digit_solver(digit, current_row) : digit
+  def current_section_solver(current_section)
+    current_section.map do |digit|
+      digit == 0 ? digit = current_section_digit_solver(digit, current_section) : digit
     end
   end
 
-  def current_row_digit_solver(digit, current_row)
-    digit = SODOKU_DIGIT_OPTIONS - current_row
+  def current_section_digit_solver(digit, current_section)
+    digit = SODOKU_DIGIT_OPTIONS - current_section
     digit[0]
   end
 
