@@ -109,11 +109,7 @@ class Puzzle
 
   def square_array_sorter(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    pretty_display = formatted_display(filled_in_puzzle)
-    print pretty_display
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     current_square = []
-    # TESTING var only
     all_squares = []
     # Squares are grouped in threes depending on which row they're in
     for i in (0...ROW_WIDTH)
@@ -123,9 +119,7 @@ class Puzzle
           current_square << puzzle_array[j + (SQUARE_WIDTH * (i - ( SQUARE_WIDTH * square_group)))]
         end
       end
-      p current_square
       current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
-      # break if solution_okay == false
       all_squares << current_square
       current_square = []
     end
