@@ -1,4 +1,6 @@
 class Puzzle
+
+  SODOKU_DIGIT_OPTIONS = [1,2,3,4,5,6,7,8,9]
   
   def check_solution_length(puzzle_int)
     puzzle_int.to_s.length == 81 ? true : false
@@ -15,10 +17,6 @@ class Puzzle
     solved_puzzle.join.to_i
   end
 
-  # def loop_over_all_rows
-  #   
-  # end
-
   private
 
   def current_row_solver(current_row)
@@ -28,8 +26,7 @@ class Puzzle
   end
 
   def current_row_digit_solver(digit, current_row)
-    sodoku_options = (1..9).to_a
-    digit = sodoku_options - current_row
+    digit = SODOKU_DIGIT_OPTIONS - current_row
   end
 
   def puzzle_to_array_of_strings(puzzle)
