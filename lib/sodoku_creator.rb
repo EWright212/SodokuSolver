@@ -2,7 +2,6 @@ class DigitObject < Struct.new(:digit, :location, :column, :row, :square)
 end
 
 # NOTE TO SELF - START COUNTING AT ZERO
-
 class NewSodoku
   
   ROW_LENGTH = 9
@@ -32,7 +31,6 @@ class NewSodoku
   
   Digit = Struct.new(:index, :row, :column, :square)
    
-  #TODO - confirm count from zero, test all this, remove magic numbers
   def get_digit_row(index)
     index / ROW_LENGTH
   end
