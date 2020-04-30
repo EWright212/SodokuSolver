@@ -20,7 +20,6 @@ class NewSodoku
       puzzle_digit_location_array << digit_object
     end
     puzzle_digit_location_array
-
   end
 
   # Method for testing output
@@ -28,8 +27,6 @@ class NewSodoku
     puzzle_digit_location_array = create_puzzle_array(puzzle)
     puzzle_digit_location_array.last.to_s
   end
-  
-  Digit = Struct.new(:index, :row, :column, :square)
    
   def get_digit_row(index)
     index / ROW_LENGTH
