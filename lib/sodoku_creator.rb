@@ -22,8 +22,9 @@ class NewSodoku
  
   private 
    
+  #TODO - confirm count from zero, test all this, remove magic numbers
   def get_digit_row(index)
-    3
+    index / 9
   end
 
   def get_digit_column(index)
