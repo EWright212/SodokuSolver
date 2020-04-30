@@ -6,6 +6,7 @@ end
 class NewSodoku
   
   ROW_LENGTH = 9
+  SQUARE_LENGTH = 3
 
   def create_puzzle_array(puzzle)
     incomplete_puzzle = puzzle_to_array_of_strings(puzzle)
@@ -45,16 +46,8 @@ class NewSodoku
   def get_digit_square(index)
     row = get_digit_row(index)
     column = get_digit_column(index)
-    p "row is " + row.to_s
-    if row < 3
-      square = column / 3
-    elsif row < 6
-      p "here"
-      square = (column / 3) + 3
-    else
-      square = (column / 3) + 6
-    end
-    p square
+    square_row = row / SQUARE_LENGTH
+    square = (column / SQUARE_LENGTH) + square_row * 3
   end
 
   def puzzle_to_array_of_strings(puzzle)
