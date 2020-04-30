@@ -1,3 +1,5 @@
+require './lib/sodoku_creator.rb'
+
 class SolutionChecker
 
   # Square is defined as a 3 x 3 section of digits in a sodoku that must contain 1-9
@@ -5,10 +7,12 @@ class SolutionChecker
   ROW_LENGTH = 9
 
   def verify_solution(filled_in_puzzle)
-    row = row_checker(filled_in_puzzle)
-    column = column_checker(filled_in_puzzle)
-    square = square_checker(filled_in_puzzle)
-    row == column && row == square && row == true ? true : false
+    puzzle = NewSodoku.new
+    puzzle.create_puzzle_array(filled_in_puzzle)
+    row_okay = row_checker(filled_in_puzzle)
+    column_okay = column_checker(filled_in_puzzle)
+    square_okay = square_checker(filled_in_puzzle)
+    row_okay == true && column_okay == true && square_okay == true ? true : false
   end
 
   def puzzle_int_to_array(puzzle_int)
@@ -16,6 +20,7 @@ class SolutionChecker
   end
 
   def row_checker(filled_in_puzzle)
+
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     for i in (0...9)
       current_row = puzzle_array[(9 * i)...(9 * (i + 1))]

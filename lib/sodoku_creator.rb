@@ -9,7 +9,7 @@ class NewSodoku
 
   def create_puzzle_array(puzzle)
     incomplete_puzzle = puzzle_to_array_of_strings(puzzle)
-    puzzle_digit_location_array = []
+    puzzle_digit_location_hash = {}
     incomplete_puzzle.each_with_index do |item, index|
       digit_object = DigitObject.new
       digit_object.digit = item
@@ -17,15 +17,16 @@ class NewSodoku
       digit_object.row = get_digit_row(index)
       digit_object.column = get_digit_column(index)
       digit_object.square = get_digit_square(index)
-      puzzle_digit_location_array << digit_object
+      puzzle_digit_location_hash[index] = digit_object
     end
-    puzzle_digit_location_array
+    p puzzle_digit_location_hash
+    puzzle_digit_location_hash
   end
 
   # Method for testing output
-  def puzzle_last_digit_array_to_string(puzzle)
-    puzzle_digit_location_array = create_puzzle_array(puzzle)
-    puzzle_digit_location_array.last.to_s
+  def puzzle_last_digit_array_to_string(puzzle, test_index)
+    puzzle_digit_location_hash = create_puzzle_array(puzzle)
+    puzzle_digit_location_hash[test_index].to_s
   end
    
   def get_digit_row(index)

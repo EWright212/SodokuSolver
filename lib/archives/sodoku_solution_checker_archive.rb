@@ -1,3 +1,5 @@
+require './lib/sodoku_creator.rb'
+
 class SolutionChecker
 
   # Square is defined as a 3 x 3 section of digits in a sodoku that must contain 1-9
