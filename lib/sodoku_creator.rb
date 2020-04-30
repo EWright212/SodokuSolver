@@ -16,6 +16,13 @@ class NewSodoku
       puzzle_digit_location_array << digit_object
     end
     puzzle_digit_location_array
+
+  end
+
+  # Method for testing output
+  def puzzle_digit_array_to_string(puzzle)
+    puzzle_digit_location_array = create_puzzle_array(puzzle)
+    puzzle_digit_location_array.to_s
   end
   
   Digit = Struct.new(:index, :row, :column, :square)
@@ -28,11 +35,11 @@ class NewSodoku
   end
 
   def get_digit_column(index)
-    2
+    0
   end
 
   def get_digit_square(index)
-    4
+    0
   end
 
   def puzzle_to_array_of_strings(puzzle)
