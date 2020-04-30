@@ -33,7 +33,6 @@ class Puzzle
 
   private
 
-  # RENAME THESE TWO AS WORK FOR OTHER SECTIONS
   def current_section_solver(current_section)
     current_section.map do |digit|
       digit == 0 ? digit = current_section_digit_solver(digit, current_section) : digit
