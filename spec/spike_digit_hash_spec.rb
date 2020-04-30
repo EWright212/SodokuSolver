@@ -10,4 +10,8 @@ describe 'Test output converting puzzle to digit objects' do
     puzzle = NewSodoku.new
     expect(puzzle.puzzle_last_digit_array_to_string(111111111222222228)).to eq("#<struct DigitObject digit=8, location=17, column=8, row=1, square=2>")
   end
+  it 'can handle two rows' do
+    puzzle = NewSodoku.new
+    expect(puzzle.puzzle_last_digit_array_to_string(1111111112222222223333333334)).to eq("#<struct DigitObject digit=4, location=27, column=0, row=3, square=3>")
+  end
 end

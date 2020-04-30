@@ -30,8 +30,6 @@ class NewSodoku
   end
   
   Digit = Struct.new(:index, :row, :column, :square)
- 
-  private 
    
   #TODO - confirm count from zero, test all this, remove magic numbers
   def get_digit_row(index)
@@ -41,9 +39,22 @@ class NewSodoku
   def get_digit_column(index)
     index % ROW_LENGTH
   end
+  
+  private
 
   def get_digit_square(index)
-    0
+    row = get_digit_row(index)
+    column = get_digit_column(index)
+    p "row is " + row.to_s
+    if row < 3
+      square = column / 3
+    elsif row < 6
+      p "here"
+      square = (column / 3) + 3
+    else
+      square = (column / 3) + 6
+    end
+    p square
   end
 
   def puzzle_to_array_of_strings(puzzle)
