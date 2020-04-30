@@ -24,7 +24,7 @@ class NewSodoku
   end
 
   # Method for testing output
-  def puzzle_last_digit_array_to_string(puzzle, test_index)
+  def puzzle_last_digit_to_string(puzzle, test_index)
     puzzle_digit_location_hash = create_puzzle_array(puzzle)
     puzzle_digit_location_hash[test_index].to_s
   end
