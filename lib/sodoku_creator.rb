@@ -10,8 +10,8 @@ class NewSodoku
       digit_object = DigitObject.new
       digit_object.digit = item
       digit_object.location = index
-      digit_object.column = get_digit_column(index)
       digit_object.row = get_digit_row(index)
+      digit_object.column = get_digit_column(index)
       digit_object.square = get_digit_square(index)
       puzzle_digit_location_array << digit_object
     end
@@ -22,12 +22,14 @@ class NewSodoku
  
   private 
    
-  def get_digit_column(index)
-    2
-  end
   def get_digit_row(index)
     3
   end
+
+  def get_digit_column(index)
+    2
+  end
+
   def get_digit_square(index)
     4
   end
