@@ -31,6 +31,20 @@ class Puzzle
     solved_puzzle.transpose.join.to_i
   end
 
+  def square_solver(incomplete_puzzle)
+    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
+    solved_puzzle = []
+    current_column = []
+    for i in (0...9)
+      for j in (0...9)
+        current_column << puzzle_array[(j * 9) + i]
+      end
+      solved_puzzle << current_section_solver(current_column)
+      current_column = []
+    end
+    solved_puzzle.transpose.join.to_i
+  end
+
   private
 
   def current_section_solver(current_section)
