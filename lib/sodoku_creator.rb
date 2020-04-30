@@ -1,7 +1,11 @@
 class DigitObject < Struct.new(:digit, :location, :column, :row, :square)
 end
 
+# NOTE TO SELF - START COUNTING AT ZERO
+
 class NewSodoku
+  
+  ROW_LENGTH = 9
 
   def create_puzzle_array(puzzle)
     incomplete_puzzle = puzzle_to_array_of_strings(puzzle)
@@ -20,9 +24,9 @@ class NewSodoku
   end
 
   # Method for testing output
-  def puzzle_digit_array_to_string(puzzle)
+  def puzzle_last_digit_array_to_string(puzzle)
     puzzle_digit_location_array = create_puzzle_array(puzzle)
-    puzzle_digit_location_array.to_s
+    puzzle_digit_location_array.last.to_s
   end
   
   Digit = Struct.new(:index, :row, :column, :square)
@@ -31,11 +35,11 @@ class NewSodoku
    
   #TODO - confirm count from zero, test all this, remove magic numbers
   def get_digit_row(index)
-    index / 9
+    index / ROW_LENGTH
   end
 
   def get_digit_column(index)
-    0
+    index % ROW_LENGTH
   end
 
   def get_digit_square(index)
