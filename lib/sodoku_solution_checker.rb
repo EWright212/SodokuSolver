@@ -11,13 +11,15 @@ class SolutionChecker
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
     row_okay = row_checker(puzzle_digit_location_hash)
     column_okay = column_checker(puzzle_digit_location_hash)
-    square_okay = square_checker(filled_in_puzzle)
+    square_okay = square_checker(puzzle_digit_location_hash)
     row_okay == true && column_okay == true && square_okay == true ? true : false
   end
 
   def puzzle_int_to_array(puzzle_int)
     puzzle_int.to_s.split(//)
   end
+
+  # TODO row and column methods v similar - combine?
 
   def row_checker(puzzle_digit_location_hash)
     for i in 0...ROW_LENGTH
@@ -39,11 +41,11 @@ class SolutionChecker
     solution_okay
   end
 
-  def square_checker(filled_in_puzzle)
-    all_squares = square_array_sorter(filled_in_puzzle)
-    solution_okay = nil
-    all_squares.each do |current_square|
-      current_square.size == current_square.uniq.size ? solution_okay = true : solution_okay = false
+  def square_checker(puzzle_digit_location_hash)
+    for i in 0...ROW_LENGTH
+      current_square = square_selector(i, puzzle_digit_location_hash)
+      current_square_digits = digit_selector(current_square)
+      current_square_digits.size == current_square_digits.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
     end
     solution_okay
@@ -84,6 +86,10 @@ class SolutionChecker
 
   def column_selector(column_int, puzzle_digit_location_hash)
     puzzle_digit_location_hash.select {|location, properties| properties.column == column_int}
+  end
+
+  def square_selector(square_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.square == square_int}
   end
 
 end
