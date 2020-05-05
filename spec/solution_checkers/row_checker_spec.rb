@@ -13,14 +13,14 @@ describe 'row checker' do
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
     expect(checker.row_checker(puzzle_digit_location_hash)).to eq false
   end
-  # it 'checks row 2 includes unique values false' do
-  #   filled_in_puzzle = 123456789113456789123456789123456789123456789123456789123456789123456789123456789
-  #   puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
-  #   expect(checker.row_checker(puzzle_digit_location_hash)).to eq false
-  # end
-  # it 'checks row 3 includes unique values false' do
-  #   filled_in_puzzle = 123456789123456789113456789123456789123456789123456789123456789123456789123456789
-  #   puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
-  #   expect(checker.row_checker(puzzle_digit_location_hash)).to eq false
-  # end
+  it 'checks row 2 includes unique values false' do
+    filled_in_puzzle = 123456789113456789123456789123456789123456789123456789123456789123456789123456789
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
+    expect(checker.row_checker(puzzle_digit_location_hash)).to eq false
+  end
+  it 'checks row 3 includes unique values false' do
+    filled_in_puzzle = 123456789123456789113456789123456789123456789123456789123456789123456789123456789
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
+    expect(checker.row_checker(puzzle_digit_location_hash)).to eq false
+  end
 end

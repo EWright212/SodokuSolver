@@ -32,6 +32,7 @@ class SolutionChecker
   def digit_selector(section)
     digits_array = []
     section.each {|location, properties| digits_array << properties.digit }
+    digits_array
   end
 
   def row_selector(row_int, puzzle_digit_location_hash)
