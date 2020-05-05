@@ -13,10 +13,6 @@ class SolutionChecker
     row_okay == true && column_okay == true && square_okay == true ? true : false
   end
 
-  def puzzle_int_to_array(puzzle_int)
-    puzzle_int.to_s.split(//)
-  end
-
   # TODO row and column methods v similar - combine?
 
   def row_checker(puzzle_digit_location_hash)
