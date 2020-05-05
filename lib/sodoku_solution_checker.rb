@@ -8,7 +8,7 @@ class SolutionChecker
 
   def verify_solution(filled_in_puzzle)
     puzzle = NewSodoku.new
-    puzzle.create_puzzle_array(filled_in_puzzle)
+    puzzle.create_puzzle_hash(filled_in_puzzle)
     row_okay = row_checker(filled_in_puzzle)
     column_okay = column_checker(filled_in_puzzle)
     square_okay = square_checker(filled_in_puzzle)

@@ -7,25 +7,26 @@ class NewSodoku
   ROW_LENGTH = 9
   SQUARE_LENGTH = 3
 
-  def create_puzzle_array(puzzle)
+  def create_puzzle_hash(puzzle)
     incomplete_puzzle = puzzle_to_array_of_strings(puzzle)
     puzzle_digit_location_hash = {}
     incomplete_puzzle.each_with_index do |item, index|
       digit_object = DigitObject.new
       digit_object.digit = item
-      digit_object.location = index
+      # Below row may be unnecessary as can access via hash location
+      digit_object.location = index 
       digit_object.row = get_digit_row(index)
       digit_object.column = get_digit_column(index)
       digit_object.square = get_digit_square(index)
       puzzle_digit_location_hash[index] = digit_object
     end
-    p puzzle_digit_location_hash
+    p puzzle_digit_location_hash[0].square
     puzzle_digit_location_hash
   end
 
   # Method for testing output
   def puzzle_last_digit_to_string(puzzle, test_index)
-    puzzle_digit_location_hash = create_puzzle_array(puzzle)
+    puzzle_digit_location_hash = create_puzzle_hash(puzzle)
     puzzle_digit_location_hash[test_index].to_s
   end
    
