@@ -8,8 +8,8 @@ class SolutionChecker
 
   def verify_solution(filled_in_puzzle)
     puzzle = NewSodoku.new
-    puzzle.create_puzzle_hash(filled_in_puzzle)
-    row_okay = row_checker(filled_in_puzzle)
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
+    row_okay = row_checker(puzzle_digit_location_hash)
     column_okay = column_checker(filled_in_puzzle)
     square_okay = square_checker(filled_in_puzzle)
     row_okay == true && column_okay == true && square_okay == true ? true : false
@@ -19,15 +19,17 @@ class SolutionChecker
     puzzle_int.to_s.split(//)
   end
 
-  def row_checker(filled_in_puzzle)
-
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    for i in (0...9)
-      current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
+  def row_checker(puzzle_digit_location_hash)
+    for i in 0..9
+      current_row = row_selector(i, puzzle_digit_location_hash)
       current_row.size == current_row.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
     end
     solution_okay
+  end
+
+  def row_selector(section_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.row == section_int}
   end
 
   def column_checker(filled_in_puzzle)
