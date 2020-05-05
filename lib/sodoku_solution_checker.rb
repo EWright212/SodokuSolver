@@ -29,16 +29,6 @@ class SolutionChecker
     solution_okay
   end
 
-  def digit_selector(section)
-    digits_array = []
-    section.each {|location, properties| digits_array << properties.digit }
-    digits_array
-  end
-
-  def row_selector(row_int, puzzle_digit_location_hash)
-    puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
-  end
-
   def column_checker(filled_in_puzzle)
     puzzle_array = puzzle_int_to_array(filled_in_puzzle)
     current_column = []
@@ -83,6 +73,18 @@ class SolutionChecker
       current_square = []
     end
     all_squares
+  end
+
+  private
+
+  def digit_selector(section)
+    digits_array = []
+    section.each {|location, properties| digits_array << properties.digit }
+    digits_array
+  end
+
+  def row_selector(row_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
   end
 
 end
