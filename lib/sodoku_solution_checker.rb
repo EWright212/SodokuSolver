@@ -28,8 +28,8 @@ class SolutionChecker
     solution_okay
   end
 
-  def row_selector(section_int, puzzle_digit_location_hash)
-    puzzle_digit_location_hash.select {|location, properties| properties.row == section_int}
+  def row_selector(row_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
   end
 
   def column_checker(filled_in_puzzle)
