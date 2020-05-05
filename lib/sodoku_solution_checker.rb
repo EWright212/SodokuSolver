@@ -51,27 +51,6 @@ class SolutionChecker
     solution_okay
   end
 
-  def square_array_sorter(filled_in_puzzle)
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    current_square = []
-    all_squares = []
-    # Squares are grouped in threes depending on which row they're in, e.g. Square 1 is in group 1, Square 4 is in group 2
-    for current_row in (0...ROW_LENGTH)
-      square_group = current_row / SQUARE_WIDTH
-      square_location = square_group * SQUARE_WIDTH
-      for current_square_row in (square_location...square_location + SQUARE_WIDTH)
-        current_digit = ROW_LENGTH * current_square_row
-        for j in (current_digit ... current_digit + SQUARE_WIDTH)
-          current_digit_index = j + SQUARE_WIDTH * (current_row - square_location)
-          current_square << puzzle_array[current_digit_index]
-        end
-      end
-      all_squares << current_square
-      current_square = []
-    end
-    all_squares
-  end
-
   private
 
   def digit_selector(section)
