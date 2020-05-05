@@ -2,8 +2,6 @@ require './lib/sodoku_creator.rb'
 
 class SolutionChecker
 
-  # Square is defined as a 3 x 3 section of digits in a sodoku that must contain 1-9
-  SQUARE_WIDTH = 3
   ROW_LENGTH = 9
 
   def verify_solution(filled_in_puzzle)
