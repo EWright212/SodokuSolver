@@ -10,7 +10,7 @@ class SolutionChecker
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(filled_in_puzzle)
     row_okay = row_checker(puzzle_digit_location_hash)
-    column_okay = column_checker(filled_in_puzzle)
+    column_okay = column_checker(puzzle_digit_location_hash)
     square_okay = square_checker(filled_in_puzzle)
     row_okay == true && column_okay == true && square_okay == true ? true : false
   end
@@ -29,17 +29,12 @@ class SolutionChecker
     solution_okay
   end
 
-  def column_checker(filled_in_puzzle)
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    current_column = []
-    for i in (0...9)
-      for j in (0...9)
-        current_column << puzzle_array[(j * 9) + i]
-      end
-      current_column.size == current_column.uniq.size ? solution_okay = true : solution_okay = false
+  def column_checker(puzzle_digit_location_hash)
+    for i in 0...ROW_LENGTH
+      current_column = column_selector(i, puzzle_digit_location_hash)
+      current_column_digits = digit_selector(current_column)
+      current_column_digits.size == current_column_digits.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
-
-      current_column = []
     end
     solution_okay
   end
@@ -85,6 +80,10 @@ class SolutionChecker
 
   def row_selector(row_int, puzzle_digit_location_hash)
     puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
+  end
+
+  def column_selector(column_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.column == column_int}
   end
 
 end
