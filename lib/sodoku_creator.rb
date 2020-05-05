@@ -20,7 +20,6 @@ class NewSodoku
       digit_object.square = get_digit_square(index)
       puzzle_digit_location_hash[index] = digit_object
     end
-    p puzzle_digit_location_hash[0].square
     puzzle_digit_location_hash
   end
 

@@ -20,12 +20,18 @@ class SolutionChecker
   end
 
   def row_checker(puzzle_digit_location_hash)
-    for i in 0..9
+    for i in 0...ROW_LENGTH
       current_row = row_selector(i, puzzle_digit_location_hash)
-      current_row.size == current_row.uniq.size ? solution_okay = true : solution_okay = false
+      current_row_digits = digit_selector(current_row)
+      current_row_digits.size == current_row_digits.uniq.size ? solution_okay = true : solution_okay = false
       break if solution_okay == false
     end
     solution_okay
+  end
+
+  def digit_selector(section)
+    digits_array = []
+    section.each {|location, properties| digits_array << properties.digit }
   end
 
   def row_selector(row_int, puzzle_digit_location_hash)
