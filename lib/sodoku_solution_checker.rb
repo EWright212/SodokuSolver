@@ -13,7 +13,7 @@ class SolutionChecker
     row_okay == true && column_okay == true && square_okay == true ? true : false
   end
 
-  # TODO row and column methods v similar - combine?
+  # TODO row, column and square methods v similar - combine?
 
   def row_checker(puzzle_digit_location_hash)
     for i in 0...ROW_LENGTH
@@ -52,6 +52,8 @@ class SolutionChecker
     section.each {|location, properties| digits_array << properties.digit }
     digits_array
   end
+
+  # TODO - 3 methods below super similar - combine?
 
   def row_selector(row_int, puzzle_digit_location_hash)
     puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
