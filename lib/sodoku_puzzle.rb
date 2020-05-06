@@ -11,6 +11,20 @@ class Puzzle
 
   # TODO - total solver method
 
+  def complete_solver(incomplete_puzzle)
+    puzzle = NewSodoku.new
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
+    solved_puzzle = []
+    complete_map = puzzle_digit_location_hash.each do |location, properties|
+      if properties.digit == 0
+        # Check all of row solver, column solver, square solver
+        square_digit_solver(location, properties, puzzle_digit_location_hash)
+      end
+      solved_puzzle << properties.digit
+    end
+    solved_puzzle.join.to_i
+  end
+
   def row_solver(incomplete_puzzle)
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
