@@ -39,10 +39,11 @@ class Puzzle
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
-    for i in 0...ROW_LENGTH
-      current_square = square_selector(i, puzzle_digit_location_hash)
-      current_square_digits = digit_selector(current_square)
-      solved_puzzle << current_section_solver(current_square_digits)
+    complete_map = puzzle_digit_location_hash.each do |location, properties|
+      if properties.digit == 0
+        properties.digit = 1
+      end
+      solved_puzzle << properties.digit
     end
     solved_puzzle.join.to_i
   end
