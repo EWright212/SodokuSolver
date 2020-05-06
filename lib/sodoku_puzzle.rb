@@ -36,39 +36,20 @@ class Puzzle
   end
 
   def square_solver(incomplete_puzzle)
- # get array
- # get hash - position, square group, column, row, digits
- # add in digits to hash
- # for each digit - if zero take all in same column - do magic on.
+    puzzle = NewSodoku.new
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
+    solved_puzzle = []
+    for i in 0...ROW_LENGTH
+      current_square = square_selector(i, puzzle_digit_location_hash)
+      current_square_digits = digit_selector(current_square)
+      solved_puzzle << current_section_solver(current_square_digits)
+    end
+    solved_puzzle.join.to_i
   end
 
   private
 
-  def square_array_sorter(filled_in_puzzle)
-    puzzle_array = puzzle_int_to_array(filled_in_puzzle)
-    current_square = []
-    all_squares = []
-    # Squares are grouped in threes depending on which row they're in, e.g. Square 1 is in group 1, Square 4 is in group 2
-    for current_row in (0...ROW_LENGTH)
-      square_group = current_row / SQUARE_WIDTH
-      square_location = square_group * SQUARE_WIDTH
-      for current_square_row in (square_location...square_location + SQUARE_WIDTH)
-        current_digit = ROW_LENGTH * current_square_row
-        for j in (current_digit ... current_digit + SQUARE_WIDTH)
-          current_digit_index = j + SQUARE_WIDTH * (current_row - square_location)
-          current_square << puzzle_array[current_digit_index]
-        end
-      end
-      all_squares << current_square
-      current_square = []
-    end
-    all_squares
-  end
-
   # TIDY three methods below
-  def current_square_solver(current_section, digit)
-    digit == 0 ? digit = current_section_digit_solver(digit, current_section) : digit
-  end
 
   def current_section_solver(current_section)
     current_section.map do |digit|
@@ -79,11 +60,6 @@ class Puzzle
   def current_section_digit_solver(digit, current_section)
     digit = SODOKU_DIGIT_OPTIONS - current_section
     digit[0]
-  end
-
-  def puzzle_to_array_of_strings(puzzle)
-    puzzle_string_array = puzzle.to_s.split(//)
-    puzzle_int_array = puzzle_string_array.map { |digit| digit = digit.to_i }
   end
 
   # TODO New methods below from solution checker - remove duplication
