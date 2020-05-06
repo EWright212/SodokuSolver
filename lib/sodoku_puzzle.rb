@@ -24,15 +24,13 @@ class Puzzle
   end
 
   def column_solver(incomplete_puzzle)
-    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
+    puzzle = NewSodoku.new
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
-    current_column = []
-    for i in (0...9)
-      for j in (0...9)
-        current_column << puzzle_array[(j * 9) + i]
-      end
-      solved_puzzle << current_section_solver(current_column)
-      current_column = []
+    for i in 0...ROW_LENGTH
+      current_column = column_selector(i, puzzle_digit_location_hash)
+      current_column_digits = digit_selector(current_column)
+      solved_puzzle << current_section_solver(current_column_digits)
     end
     solved_puzzle.transpose.join.to_i
   end
