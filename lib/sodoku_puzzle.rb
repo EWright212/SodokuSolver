@@ -3,18 +3,22 @@ require './lib/sodoku_creator.rb'
 class Puzzle
 
   SODOKU_DIGIT_OPTIONS = [1,2,3,4,5,6,7,8,9]
+  ROW_LENGTH = 9
   
   def check_solution_length(puzzle_int)
     puzzle_int.to_s.length == 81 ? true : false
   end
 
+  # TODO - total solver method
+
   def row_solver(incomplete_puzzle)
-    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
+    puzzle = NewSodoku.new
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
-    for i in (0...9)
-      current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
-      solved_puzzle << current_section_solver(current_row)
-      current_row = []
+    for i in 0...ROW_LENGTH
+      current_row = row_selector(i, puzzle_digit_location_hash)
+      current_row_digits = digit_selector(current_row)
+      solved_puzzle << current_section_solver(current_row_digits)
     end
     solved_puzzle.join.to_i
   end
@@ -82,6 +86,27 @@ class Puzzle
   def puzzle_to_array_of_strings(puzzle)
     puzzle_string_array = puzzle.to_s.split(//)
     puzzle_int_array = puzzle_string_array.map { |digit| digit = digit.to_i }
+  end
+
+  # TODO New methods below from solution checker - remove duplication
+  def digit_selector(section)
+    digits_array = []
+    section.each {|location, properties| digits_array << properties.digit }
+    digits_array
+  end
+
+  # TODO - 3 methods below super similar - combine?
+
+  def row_selector(row_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
+  end
+
+  def column_selector(column_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.column == column_int}
+  end
+
+  def square_selector(square_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select {|location, properties| properties.square == square_int}
   end
 
 end
