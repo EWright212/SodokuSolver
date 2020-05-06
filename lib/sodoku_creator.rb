@@ -1,4 +1,4 @@
-class DigitObject < Struct.new(:digit, :location, :column, :row, :square)
+class DigitObject < Struct.new(:digit, :location, :column, :row, :square, :possibilities)
 end
 
 # NOTE TO SELF - START COUNTING AT ZERO
@@ -6,6 +6,7 @@ class NewSodoku
   
   ROW_LENGTH = 9
   SQUARE_LENGTH = 3
+  SODOKU_DIGIT_OPTIONS = [1,2,3,4,5,6,7,8,9]
 
   def create_puzzle_hash(puzzle)
     incomplete_puzzle = puzzle_to_array_of_strings(puzzle)
@@ -18,6 +19,7 @@ class NewSodoku
       digit_object.row = get_digit_row(index)
       digit_object.column = get_digit_column(index)
       digit_object.square = get_digit_square(index)
+      digit_object.possibilities = SODOKU_DIGIT_OPTIONS
       puzzle_digit_location_hash[index] = digit_object
     end
     puzzle_digit_location_hash

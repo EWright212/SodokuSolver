@@ -18,12 +18,18 @@ class Puzzle
     complete_map = puzzle_digit_location_hash.each do |location, properties|
       while properties.digit == 0
         # Check all of row solver, column solver, square solver
-        square_digit_solver(location, properties, puzzle_digit_location_hash)
+        p "#{properties}"
+        properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)
+        p "#{properties.possibilities}"
+        p "#{properties.digit}"
         break if properties.digit != 0
-        row_digit_solver(location, properties, puzzle_digit_location_hash)
+        p "after break 1"
+        properties.digit = row_digit_solver(location, properties, puzzle_digit_location_hash)
         break if properties.digit != 0
-        column_digit_solver(location, properties, puzzle_digit_location_hash)
+        p "after break 2"
+        properties.digit = column_digit_solver(location, properties, puzzle_digit_location_hash)
         break if properties.digit != 0
+        p "after break 3"
       end
       solved_puzzle << properties.digit
     end
@@ -63,6 +69,9 @@ class Puzzle
       if properties.digit == 0
         # Check all of row solver, column solver, square solver
         square_digit_solver(location, properties, puzzle_digit_location_hash)
+        if properties.possibilities.length == 1
+          properties.digit = properties.possibilities[0]
+        end
       end
       solved_puzzle << properties.digit
     end
@@ -75,7 +84,7 @@ class Puzzle
     square_int = properties.square
     all_items_in_square = square_selector(square_int, puzzle_digit_location_hash)
     square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
-    properties.digit = SODOKU_DIGIT_OPTIONS - square_all_digits
+    properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
   end
 
   # TIDY three methods below
