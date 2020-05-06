@@ -16,25 +16,29 @@ class Puzzle
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
     complete_map = puzzle_digit_location_hash.each do |location, properties|
-      while properties.digit == 0
+      if properties.digit == 0
         # Check all of row solver, column solver, square solver
         p "#{properties}"
         properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)
-        p "#{properties.possibilities}"
+        p properties.possibilities
         p "#{properties.digit}"
-        break if properties.digit != 0
-        p "after break 1"
-        p "#{properties.possibilities}"
-        p "#{properties.digit}"
-        properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
-        p "#{properties.possibilities}"
-        p "#{properties.digit}"
-        break if properties.digit != 0
-        p "after break 2"
-        properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
-        break if properties.digit != 0
-        p "after break 3"
+        if properties.digit == 0
+          p "after break 1"
+          p "#{properties.possibilities}"
+          p "#{properties.digit}"
+          properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
+          p "#{properties.possibilities}"
+          p "#{properties.digit}"
+          if properties.digit == 0
+            p "after break 2"
+            properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
+            p "#{properties.possibilities}"
+            p "#{properties.digit}"
+          end
+        end
       end
+      p "at end"
+      p properties.digit
       solved_puzzle << properties.digit
     end
     solved_puzzle.join.to_i
@@ -81,29 +85,41 @@ class Puzzle
 
   private
 
+  #  TODO - step one - get these solvers to remove invalid options
+  #  TODO - step two - to aviod infinite loop - complete solver goes through each solver for each number only once
+
   def square_digit_solver(location, properties, puzzle_digit_location_hash)
     square_int = properties.square
     all_items_in_square = square_selector(square_int, puzzle_digit_location_hash)
     square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
-    properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
+    properties.possibilities = properties.possibilities - square_all_digits
     if properties.possibilities.length == 1
       properties.digit = properties.possibilities[0]
     end
+    properties.possibilities
   end
 
   def row_digit_solver(location, properties, puzzle_digit_location_hash)
-    square_int = properties.row
-    all_items_in_square = row_selector(square_int, puzzle_digit_location_hash)
-    square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
-    properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
+    row_int = properties.row
+    all_items_in_row = row_selector(row_int, puzzle_digit_location_hash)
+    row_all_digits = all_items_in_row.map { |location, properties| properties.digit}
+    properties.possibilities = properties.possibilities - row_all_digits
+    if properties.possibilities.length == 1
+      properties.digit = properties.possibilities[0]
+    end
+    properties.possibilities
   end
 
-  # def column_digit_solver(location, properties, puzzle_digit_location_hash)
-  #   square_int = properties.column
-  #   all_items_in_square = column_selector(square_int, puzzle_digit_location_hash)
-  #   square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
-  #   properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
-  # end
+  def column_digit_solver(location, properties, puzzle_digit_location_hash)
+    column_int = properties.column
+    all_items_in_column = column_selector(column_int, puzzle_digit_location_hash)
+    column_all_digits = all_items_in_column.map { |location, properties| properties.digit}
+    properties.possibilities = properties.possibilities - column_all_digits
+    if properties.possibilities.length == 1
+      properties.digit = properties.possibilities[0]
+    end
+    properties.possibilities
+  end
 
   # TIDY three methods below
 
