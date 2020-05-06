@@ -16,9 +16,14 @@ class Puzzle
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
     complete_map = puzzle_digit_location_hash.each do |location, properties|
-      if properties.digit == 0
+      while properties.digit == 0
         # Check all of row solver, column solver, square solver
         square_digit_solver(location, properties, puzzle_digit_location_hash)
+        break if properties.digit != 0
+        row_digit_solver(location, properties, puzzle_digit_location_hash)
+        break if properties.digit != 0
+        column_digit_solver(location, properties, puzzle_digit_location_hash)
+        break if properties.digit != 0
       end
       solved_puzzle << properties.digit
     end
