@@ -24,10 +24,14 @@ class Puzzle
         p "#{properties.digit}"
         break if properties.digit != 0
         p "after break 1"
-        properties.digit = row_digit_solver(location, properties, puzzle_digit_location_hash)
+        p "#{properties.possibilities}"
+        p "#{properties.digit}"
+        properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
+        p "#{properties.possibilities}"
+        p "#{properties.digit}"
         break if properties.digit != 0
         p "after break 2"
-        properties.digit = column_digit_solver(location, properties, puzzle_digit_location_hash)
+        properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
         break if properties.digit != 0
         p "after break 3"
       end
@@ -69,9 +73,6 @@ class Puzzle
       if properties.digit == 0
         # Check all of row solver, column solver, square solver
         square_digit_solver(location, properties, puzzle_digit_location_hash)
-        if properties.possibilities.length == 1
-          properties.digit = properties.possibilities[0]
-        end
       end
       solved_puzzle << properties.digit
     end
@@ -85,7 +86,24 @@ class Puzzle
     all_items_in_square = square_selector(square_int, puzzle_digit_location_hash)
     square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
     properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
+    if properties.possibilities.length == 1
+      properties.digit = properties.possibilities[0]
+    end
   end
+
+  def row_digit_solver(location, properties, puzzle_digit_location_hash)
+    square_int = properties.row
+    all_items_in_square = row_selector(square_int, puzzle_digit_location_hash)
+    square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
+    properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
+  end
+
+  # def column_digit_solver(location, properties, puzzle_digit_location_hash)
+  #   square_int = properties.column
+  #   all_items_in_square = column_selector(square_int, puzzle_digit_location_hash)
+  #   square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
+  #   properties.possibilities = SODOKU_DIGIT_OPTIONS - square_all_digits
+  # end
 
   # TIDY three methods below
 
