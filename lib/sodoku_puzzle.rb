@@ -17,28 +17,14 @@ class Puzzle
     solved_puzzle = []
     complete_map = puzzle_digit_location_hash.each do |location, properties|
       if properties.digit == 0
-        # Check all of row solver, column solver, square solver
-        p "#{properties}"
         properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)
-        p properties.possibilities
-        p "#{properties.digit}"
         if properties.digit == 0
-          p "after break 1"
-          p "#{properties.possibilities}"
-          p "#{properties.digit}"
           properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
-          p "#{properties.possibilities}"
-          p "#{properties.digit}"
           if properties.digit == 0
-            p "after break 2"
             properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
-            p "#{properties.possibilities}"
-            p "#{properties.digit}"
           end
         end
       end
-      p "at end"
-      p properties.digit
       solved_puzzle << properties.digit
     end
     solved_puzzle.join.to_i
