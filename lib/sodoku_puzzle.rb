@@ -53,7 +53,10 @@ class Puzzle
   private
 
   def square_digit_solver(location, properties, puzzle_digit_location_hash)
-    properties.digit = 1
+    square_int = properties.square
+    all_items_in_square = square_selector(square_int, puzzle_digit_location_hash)
+    square_all_digits = all_items_in_square.map { |location, properties| properties.digit}
+    properties.digit = SODOKU_DIGIT_OPTIONS - square_all_digits
   end
 
   # TIDY three methods below
