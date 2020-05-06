@@ -35,13 +35,15 @@ class Puzzle
     solved_puzzle.transpose.join.to_i
   end
 
+  # Rename to total sover when works for not just squares
   def square_solver(incomplete_puzzle)
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
     complete_map = puzzle_digit_location_hash.each do |location, properties|
       if properties.digit == 0
-        properties.digit = 1
+        # Check all of row solver, column solver, square solver
+        square_digit_solver(location, properties, puzzle_digit_location_hash)
       end
       solved_puzzle << properties.digit
     end
@@ -49,6 +51,10 @@ class Puzzle
   end
 
   private
+
+  def square_digit_solver(location, properties, puzzle_digit_location_hash)
+    properties.digit = 1
+  end
 
   # TIDY three methods below
 
