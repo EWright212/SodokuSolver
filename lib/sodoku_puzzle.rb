@@ -1,66 +1,82 @@
+require './lib/sodoku_creator.rb'
+
 class Puzzle
 
-  SODOKU_DIGIT_OPTIONS = [1,2,3,4,5,6,7,8,9]
+  SODOKU_DIGIT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  ROW_LENGTH = 9
   
   def check_solution_length(puzzle_int)
-    puzzle_int.to_s.length == 81 ? true : false
+    puzzle_int.to_s.length == 81
   end
 
-  def row_solver(incomplete_puzzle)
-    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
+  def complete_solver(incomplete_puzzle)
+    puzzle = NewSodoku.new
+    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
-    for i in (0...9)
-      current_row = puzzle_array[(9 * i)...(9 * (i + 1))]
-      solved_puzzle << current_section_solver(current_row)
-      current_row = []
+    until puzzle_digit_location_hash.select { |_location, properties| properties.digit.zero? } == {}
+      puzzle_digit_location_hash.each do |location, properties|
+        if properties.digit.zero?
+          properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)
+          if properties.digit.zero?
+            properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
+            if properties.digit.zero?
+              properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
+            end
+          end
+        end
+      end
     end
+    puzzle_digit_location_hash.map { |_location, properties| solved_puzzle << properties.digit }
     solved_puzzle.join.to_i
-  end
-
-  def column_solver(incomplete_puzzle)
-    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
-    solved_puzzle = []
-    current_column = []
-    for i in (0...9)
-      for j in (0...9)
-        current_column << puzzle_array[(j * 9) + i]
-      end
-      solved_puzzle << current_section_solver(current_column)
-      current_column = []
-    end
-    solved_puzzle.transpose.join.to_i
-  end
-
-  def square_solver(incomplete_puzzle)
-    puzzle_array = puzzle_to_array_of_strings(incomplete_puzzle)
-    solved_puzzle = []
-    current_column = []
-    for i in (0...9)
-      for j in (0...9)
-        current_column << puzzle_array[(j * 9) + i]
-      end
-      solved_puzzle << current_section_solver(current_column)
-      current_column = []
-    end
-    solved_puzzle.transpose.join.to_i
   end
 
   private
 
-  def current_section_solver(current_section)
-    current_section.map do |digit|
-      digit == 0 ? digit = current_section_digit_solver(digit, current_section) : digit
+  def square_digit_solver(_location, properties, puzzle_digit_location_hash)
+    square_int = properties.square
+    all_items_in_square = square_selector(square_int, puzzle_digit_location_hash)
+    square_all_digits = all_items_in_square.map { |_location, properties| properties.digit }
+    properties.possibilities = properties.possibilities - square_all_digits
+    if properties.possibilities.length == 1
+      properties.digit = properties.possibilities[0]
     end
+    properties.possibilities
   end
 
-  def current_section_digit_solver(digit, current_section)
-    digit = SODOKU_DIGIT_OPTIONS - current_section
-    digit[0]
+  def row_digit_solver(_location, properties, puzzle_digit_location_hash)
+    row_int = properties.row
+    all_items_in_row = row_selector(row_int, puzzle_digit_location_hash)
+    row_all_digits = all_items_in_row.map { |_location, properties| properties.digit }
+    properties.possibilities = properties.possibilities - row_all_digits
+    if properties.possibilities.length == 1
+      properties.digit = properties.possibilities[0]
+    end
+    properties.possibilities
   end
 
-  def puzzle_to_array_of_strings(puzzle)
-    puzzle_string_array = puzzle.to_s.split(//)
-    puzzle_int_array = puzzle_string_array.map { |digit| digit = digit.to_i }
+  def column_digit_solver(_location, properties, puzzle_digit_location_hash)
+    column_int = properties.column
+    all_items_in_column = column_selector(column_int, puzzle_digit_location_hash)
+    column_all_digits = all_items_in_column.map { |_location, properties| properties.digit }
+    properties.possibilities = properties.possibilities - column_all_digits
+    if properties.possibilities.length == 1
+      properties.digit = properties.possibilities[0]
+    end
+    properties.possibilities
+  end
+
+  # TODO - 3 methods below super similar - combine?
+
+  def row_selector(row_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select { |_location, properties| properties.row == row_int }
+  end
+
+  def column_selector(column_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select { |_location, properties| properties.column == column_int }
+  end
+
+  def square_selector(square_int, puzzle_digit_location_hash)
+    puzzle_digit_location_hash.select { |_location, properties| properties.square == square_int }
   end
 
 end
