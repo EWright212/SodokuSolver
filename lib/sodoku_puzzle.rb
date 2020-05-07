@@ -71,15 +71,15 @@ class Puzzle
   # TODO - 3 methods below super similar - combine?
 
   def row_selector(row_int, puzzle_digit_location_hash)
-    puzzle_digit_location_hash.select {|location, properties| properties.row == row_int}
+    puzzle_digit_location_hash.select { |_location, properties| properties.row == row_int }
   end
 
   def column_selector(column_int, puzzle_digit_location_hash)
-    puzzle_digit_location_hash.select {|location, properties| properties.column == column_int}
+    puzzle_digit_location_hash.select { |_location, properties| properties.column == column_int }
   end
 
   def square_selector(square_int, puzzle_digit_location_hash)
-    puzzle_digit_location_hash.select {|location, properties| properties.square == square_int}
+    puzzle_digit_location_hash.select { |_location, properties| properties.square == square_int }
   end
 
 end
