@@ -2,18 +2,18 @@ require './lib/sodoku_creator.rb'
 
 class Puzzle
 
-  SODOKU_DIGIT_OPTIONS = [1,2,3,4,5,6,7,8,9]
+  SODOKU_DIGIT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   ROW_LENGTH = 9
   
   def check_solution_length(puzzle_int)
-    puzzle_int.to_s.length == 81 ? true : false
+    puzzle_int.to_s.length == 81
   end
 
   def complete_solver(incomplete_puzzle)
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
-    until puzzle_digit_location_hash.select { |location, properties| properties.digit == 0 } == {}
+    until puzzle_digit_location_hash.select { |_location, properties| properties.digit.zero? } == {}
       puzzle_digit_location_hash.each do |location, properties|
         if properties.digit.zero?
           properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)

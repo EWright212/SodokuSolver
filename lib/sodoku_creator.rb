@@ -49,8 +49,7 @@ class NewSodoku
   end
 
   def puzzle_to_array_of_strings(puzzle)
-    puzzle_string_array = puzzle.to_s.split(//)
-    puzzle_int_array = puzzle_string_array.map { |digit| digit = digit.to_i }
+    puzzle.to_s.split(//).map { |digit| digit.to_i }
   end
 
 end
