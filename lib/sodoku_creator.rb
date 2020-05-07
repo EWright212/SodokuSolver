@@ -1,4 +1,4 @@
-class DigitObject < Struct.new(:digit, :location, :column, :row, :square, :possibilities)
+class DigitObject < Struct.new(:digit, :column, :row, :square, :possibilities)
 end
 
 # NOTE TO SELF - START COUNTING AT ZERO
@@ -13,9 +13,7 @@ class NewSodoku
     puzzle_digit_location_hash = {}
     incomplete_puzzle.each_with_index do |item, index|
       digit_object = DigitObject.new
-      digit_object.digit = item
-      # Below row may be unnecessary as can access via hash location
-      digit_object.location = index 
+      digit_object.digit = item 
       digit_object.row = get_digit_row(index)
       digit_object.column = get_digit_column(index)
       digit_object.square = get_digit_square(index)
