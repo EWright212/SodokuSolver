@@ -6,7 +6,7 @@ class NewSodoku
   
   ROW_LENGTH = 9
   SQUARE_LENGTH = 3
-  SODOKU_DIGIT_OPTIONS = [1,2,3,4,5,6,7,8,9]
+  SODOKU_DIGIT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   def create_puzzle_hash(puzzle)
     incomplete_puzzle = puzzle_to_array_of_strings(puzzle)
@@ -45,7 +45,7 @@ class NewSodoku
     row = get_digit_row(index)
     column = get_digit_column(index)
     square_row = row / SQUARE_LENGTH
-    square = (column / SQUARE_LENGTH) + square_row * 3
+    (column / SQUARE_LENGTH) + square_row * 3
   end
 
   def puzzle_to_array_of_strings(puzzle)
@@ -53,4 +53,3 @@ class NewSodoku
   end
 
 end
-
