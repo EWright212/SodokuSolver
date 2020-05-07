@@ -9,8 +9,6 @@ class Puzzle
     puzzle_int.to_s.length == 81 ? true : false
   end
 
-  # TODO - total solver method
-
   def complete_solver(incomplete_puzzle)
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
@@ -29,45 +27,6 @@ class Puzzle
       end
     end
     puzzle_digit_location_hash.map {|location, properties| solved_puzzle << properties.digit}
-    solved_puzzle.join.to_i
-  end
-
-  def row_solver(incomplete_puzzle)
-    puzzle = NewSodoku.new
-    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
-    solved_puzzle = []
-    for i in 0...ROW_LENGTH
-      current_row = row_selector(i, puzzle_digit_location_hash)
-      current_row_digits = digit_selector(current_row)
-      solved_puzzle << current_section_solver(current_row_digits)
-    end
-    solved_puzzle.join.to_i
-  end
-
-  def column_solver(incomplete_puzzle)
-    puzzle = NewSodoku.new
-    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
-    solved_puzzle = []
-    for i in 0...ROW_LENGTH
-      current_column = column_selector(i, puzzle_digit_location_hash)
-      current_column_digits = digit_selector(current_column)
-      solved_puzzle << current_section_solver(current_column_digits)
-    end
-    solved_puzzle.transpose.join.to_i
-  end
-
-  # Rename to total sover when works for not just squares
-  def square_solver(incomplete_puzzle)
-    puzzle = NewSodoku.new
-    puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
-    solved_puzzle = []
-    complete_map = puzzle_digit_location_hash.each do |location, properties|
-      if properties.digit == 0
-        # Check all of row solver, column solver, square solver
-        square_digit_solver(location, properties, puzzle_digit_location_hash)
-      end
-      solved_puzzle << properties.digit
-    end
     solved_puzzle.join.to_i
   end
 
