@@ -68,26 +68,6 @@ class Puzzle
     properties.possibilities
   end
 
-  # TIDY three methods below
-
-  def current_section_solver(current_section)
-    current_section.map do |digit|
-      digit == 0 ? digit = current_section_digit_solver(digit, current_section) : digit
-    end
-  end
-
-  def current_section_digit_solver(digit, current_section)
-    digit = SODOKU_DIGIT_OPTIONS - current_section
-    digit[0]
-  end
-
-  # TODO New methods below from solution checker - remove duplication
-  def digit_selector(section)
-    digits_array = []
-    section.each {|location, properties| digits_array << properties.digit }
-    digits_array
-  end
-
   # TODO - 3 methods below super similar - combine?
 
   def row_selector(row_int, puzzle_digit_location_hash)
