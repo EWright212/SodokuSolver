@@ -15,18 +15,20 @@ class Puzzle
     puzzle = NewSodoku.new
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
-    complete_map = puzzle_digit_location_hash.each do |location, properties|
-      if properties.digit == 0
-        properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)
+    until puzzle_digit_location_hash.select {|location, properties| properties.digit == 0} == {}
+      complete_map = puzzle_digit_location_hash.each do |location, properties|
         if properties.digit == 0
-          properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
+          properties.possibilities = square_digit_solver(location, properties, puzzle_digit_location_hash)
           if properties.digit == 0
-            properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
+            properties.possibilities = row_digit_solver(location, properties, puzzle_digit_location_hash)
+            if properties.digit == 0
+              properties.possibilities = column_digit_solver(location, properties, puzzle_digit_location_hash)
+            end
           end
         end
       end
-      solved_puzzle << properties.digit
     end
+    puzzle_digit_location_hash.map {|location, properties| solved_puzzle << properties.digit}
     solved_puzzle.join.to_i
   end
 
