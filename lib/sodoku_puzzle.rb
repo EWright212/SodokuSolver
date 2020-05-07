@@ -65,7 +65,8 @@ class Puzzle
     properties.possibilities
   end
 
-  # TODO - 3 methods below super similar - combine?
+  # TODO - 3 methods below super similar - combine? 
+  #  Also are identical to methods in solution checker
 
   def row_selector(row_int, puzzle_digit_location_hash)
     puzzle_digit_location_hash.select { |_location, properties| properties.row == row_int }
