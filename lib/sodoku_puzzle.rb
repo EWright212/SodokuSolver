@@ -67,6 +67,9 @@ class Puzzle
     properties.possibilities
   end
 
+  # Next TODO: Second heuristic. In one shape, only one cell has a possibility of being that specific number
+
+
   # TODO - 3 methods below super similar - combine? 
   #  Also are identical to methods in solution checker
 

@@ -67,3 +67,15 @@ Run command:
 Run command:
 
 `rspec`
+
+# Glossary of my sodoku terms
+
+Row - 1x9 shape
+Column - 9x1 shape
+Square - 3x3 shape (NOT the whole puzzle)
+Item - 1x1 shape (1 cell)
+Digit - The number in a completed cell
+Position - combination of row, column and square
+Location - from 0 to 81, starting in the top left hand corner of the Sodoku grid reading left to right
+Possibilities - This item's digit could be one of these possibilities in this array
+Hash - list of the item's digit (0 if unknown), position and current possibilities. Hash is ordered by location.
