@@ -48,6 +48,7 @@ class Puzzle
     properties.possibilities = properties.possibilities - square_all_digits
     if properties.possibilities.length == 1
       properties.digit = properties.possibilities[0]
+      properties.possibilities =[]
     end
     properties.possibilities
   end
@@ -59,6 +60,7 @@ class Puzzle
     properties.possibilities = properties.possibilities - row_all_digits
     if properties.possibilities.length == 1
       properties.digit = properties.possibilities[0]
+      properties.possibilities =[]
     end
     properties.possibilities
   end
@@ -70,6 +72,7 @@ class Puzzle
     properties.possibilities = properties.possibilities - column_all_digits
     if properties.possibilities.length == 1
       properties.digit = properties.possibilities[0]
+      properties.possibilities =[]
     end
     properties.possibilities
   end
