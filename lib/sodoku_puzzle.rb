@@ -42,34 +42,24 @@ class Puzzle
   private
 
   def square_digit_solver(_location, properties, puzzle_digit_location_hash)
-    square_int = properties.square
-    all_items_in_square = square_selector(square_int, puzzle_digit_location_hash)
-    square_all_digits = all_items_in_square.map { |_location, properties| properties.digit }
-    properties.possibilities = properties.possibilities - square_all_digits
-    if properties.possibilities.length == 1
-      properties.digit = properties.possibilities[0]
-      properties.possibilities =[]
-    end
-    properties.possibilities
+    all_items_in_square = square_selector(properties.square, puzzle_digit_location_hash)
+    the_only_candidate_in_a_cell(_location, properties, puzzle_digit_location_hash, properties.square, all_items_in_square)
   end
 
   def row_digit_solver(_location, properties, puzzle_digit_location_hash)
-    row_int = properties.row
-    all_items_in_row = row_selector(row_int, puzzle_digit_location_hash)
-    row_all_digits = all_items_in_row.map { |_location, properties| properties.digit }
-    properties.possibilities = properties.possibilities - row_all_digits
-    if properties.possibilities.length == 1
-      properties.digit = properties.possibilities[0]
-      properties.possibilities =[]
-    end
-    properties.possibilities
+    all_items_in_row = row_selector(properties.row, puzzle_digit_location_hash)
+    the_only_candidate_in_a_cell(_location, properties, puzzle_digit_location_hash, properties.row, all_items_in_row)
   end
 
   def column_digit_solver(_location, properties, puzzle_digit_location_hash)
-    column_int = properties.column
-    all_items_in_column = column_selector(column_int, puzzle_digit_location_hash)
-    column_all_digits = all_items_in_column.map { |_location, properties| properties.digit }
-    properties.possibilities = properties.possibilities - column_all_digits
+    all_items_in_column = column_selector(properties.column, puzzle_digit_location_hash)
+    the_only_candidate_in_a_cell(_location, properties, puzzle_digit_location_hash, properties.column, all_items_in_column)
+  end
+
+  # This solves the simplest heuristic - Single - the only remaning candidate in a cell
+  def the_only_candidate_in_a_cell(_location, properties, puzzle_digit_location_hash, shape, all_items_in_shape)
+    shape_all_digits = all_items_in_shape.map { |_location, properties| properties.digit }
+    properties.possibilities = properties.possibilities - shape_all_digits
     if properties.possibilities.length == 1
       properties.digit = properties.possibilities[0]
       properties.possibilities =[]
