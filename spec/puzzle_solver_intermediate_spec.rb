@@ -1,7 +1,7 @@
 require './lib/sodoku_puzzle'
 require './lib/sodoku_formatter'
 
-describe 'simple solver' do
+describe 'intermediate solver' do
   puzzle = Puzzle.new
   context 'simple puzzle' do
     it 'intermediate 1' do

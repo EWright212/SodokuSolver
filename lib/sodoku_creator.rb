@@ -17,7 +17,7 @@ class NewSodoku
       digit_object.row = get_digit_row(index)
       digit_object.column = get_digit_column(index)
       digit_object.square = get_digit_square(index)
-      digit_object.possibilities = SODOKU_DIGIT_OPTIONS
+      digit_object.possibilities = item == 0? SODOKU_DIGIT_OPTIONS : []
       puzzle_digit_location_hash[index] = digit_object
     end
     puzzle_digit_location_hash
