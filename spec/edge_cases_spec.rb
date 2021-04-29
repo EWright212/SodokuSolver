@@ -1,6 +1,6 @@
 require 'sodoku_puzzle'
 
-describe 'solution legnth checker' do
+describe 'solution length checker' do
   it 'confirms solution length is 81 numbers' do
     puzzle = Puzzle.new
     expect(puzzle.check_solution_length(123123123456456456789789789123123123456456456789789789123123123456456456789789789)).to eq true

@@ -54,3 +54,16 @@ The meanings of most of these terms can be extended to region shapes other than 
 8. X-wing – See N-fish (with N=2).
 9.  Swordfish – See N-fish (with N=3).
 10. N-fish – Analogues of hidden pairs/triples/quads for multiple rows and columns. A pattern formed by all candidate cells for some digit in N rows (or columns), that spans only N columns (rows). All other candidates for that digit in those columns (rows) can then be excluded.
+
+
+# Set up
+
+Run command:
+
+`bundle install`
+
+# To Test
+
+Run command:
+
+`rspec`
