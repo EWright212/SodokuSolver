@@ -17,6 +17,7 @@ class Puzzle
     puzzle_digit_location_hash = puzzle.create_puzzle_hash(incomplete_puzzle)
     solved_puzzle = []
     starttime = Time.now
+    # TODO: this is ugly
     until puzzle_digit_location_hash.select { |_location, properties|  properties.digit.zero? } == {}
       puzzle_digit_location_hash.each do |location, properties|
         if properties.digit.zero?
@@ -31,7 +32,7 @@ class Puzzle
       end
       break if Time.now > starttime + 10
     end
-    pp puzzle_digit_location_hash
+    # pp puzzle_digit_location_hash
     puzzle_digit_location_hash.map { |_location, properties| solved_puzzle << properties.digit }
     # For testing only - prevent if string starts with zero being converted to int
     solved_puzzle[0].zero? ? solved_puzzle[0] = 1 : nil

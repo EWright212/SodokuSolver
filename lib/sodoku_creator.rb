@@ -30,7 +30,7 @@ class NewSodoku
   end
    
   def get_digit_row(index)
-    index / ROW_LENGTH
+    (index / ROW_LENGTH)
   end
 
   def get_digit_column(index)
